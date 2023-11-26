@@ -3,6 +3,8 @@
 
 
 --Part 1: List the columns and their data types in the Jobs table.
+--Column 1: Id          Column 2: Name       Column 3: EmployerId
+--DataType: int AI PK   DataType: longtext   Datatype: int
 
 --Part 2: Write a query to list the names of the employers in St. Louis City.
 
