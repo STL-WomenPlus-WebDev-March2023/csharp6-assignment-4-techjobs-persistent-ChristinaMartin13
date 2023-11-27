@@ -8,11 +8,14 @@
 }
 else
 {
-    <table class="table">
+    <table class="table table-striped">
+      <thead>
         <tr>
             <th>Id
             <th>Employer</th>
         </tr>
+      </thead>
+      <tbody>
         @foreach (Employer employer in Model)
         {
             <tr>
@@ -20,6 +23,11 @@ else
                 <td><a asp-controller="Employer" asp-action="About" asp-route-id="@employer.Id">@employer.Name</a></td>
             </tr>
         }
+      </tbody>
     </table>
+
+    <p>
+        <a asp-action="Create" asp-controller="Employer">Add New Employer</a>
+    </p>
 }
 
