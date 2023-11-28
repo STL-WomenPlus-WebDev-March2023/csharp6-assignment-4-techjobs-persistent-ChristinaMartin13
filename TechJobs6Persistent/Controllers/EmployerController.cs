@@ -14,18 +14,18 @@ namespace TechJobs6Persistent.Controllers
 {
     public class EmployerController : Controller
     {
-        private readonly JobDbContext _dbContext;
+        private readonly JobDbContext context;
 
         public EmployerController(JobDbContext dbContext)
         {
-            _dbContext = dbContext;
+            context = dbContext;
         }
 
         // GET: /<controller>/
         [HttpGet]
         public IActionResult Index()
         {
-            var employers = _dbContext.Employers.ToList();
+            var employers = context.Employers.ToList();
             return View(employers);
         }
 
@@ -47,10 +47,10 @@ namespace TechJobs6Persistent.Controllers
                     Location = model.Location
                 };
 
-                _dbContext.Employers.Add(newEmployer);
-                _dbContext.SaveChanges();
+                context.Employers.Add(newEmployer);
+                context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return Redirect("/Employer");
             }
 
             return View("Create", model);
@@ -59,7 +59,7 @@ namespace TechJobs6Persistent.Controllers
 
         public IActionResult About(int id)
         {
-            var employer = _dbContext.Employers.Find(id);
+            var employer = context.Employers.Find(id);
 
             if (employer == null)
             {

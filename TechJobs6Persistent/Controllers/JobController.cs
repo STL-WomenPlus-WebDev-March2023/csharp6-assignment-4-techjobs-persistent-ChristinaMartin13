@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TechJobs6Persistent.Data;
 using TechJobs6Persistent.Models;
@@ -31,13 +32,39 @@ namespace TechJobs6Persistent.Controllers
 
         public IActionResult Add()
         {
-            return View();
+            List<Employer> employers = context.Employers.ToList();
+
+            // Create an instance of AddJobViewModel and pass the list of employers
+            var model = new AddJobViewModel
+            {
+                Employers = employers.Select(e => new SelectListItem
+                {
+                    Value = e.Id.ToString(),
+                    Text = e.Name
+                }).ToList()
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult ProcessAddJobForm()
+        public IActionResult Add(AddJobViewModel viewModel)
         {
-            return View();
+            if (ModelState.IsValid)
+            {          
+                Job newJob = new Job
+                {
+                    Name = viewModel.Name,
+                    EmployerId = viewModel.EmployerId
+                  
+                };
+
+                context.Jobs?.Add(newJob);
+                context.SaveChanges();
+
+                return Redirect("/Job");
+            }
+            return View("Add", viewModel);
         }
 
         public IActionResult Delete()
