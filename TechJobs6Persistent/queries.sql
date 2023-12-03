@@ -17,4 +17,5 @@
 --FROM skills
 --JOIN jobskills ON skills.ID = jobskills.SkillsId
 --JOIN jobs ON jobskills.jobsId = jobs.Id
---ORDER BY skills.SkillName;
+--WHERE jobs.Id IS NOT NULL
+--ORDER BY skills.SkillName ASC;
