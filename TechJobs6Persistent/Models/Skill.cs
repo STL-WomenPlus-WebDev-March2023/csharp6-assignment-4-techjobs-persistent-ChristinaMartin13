@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace TechJobs6Persistent.Models
 {
     public class Skill
@@ -21,7 +22,9 @@ namespace TechJobs6Persistent.Models
 
         public Skill()
         {
-        }
+
+        }        
+   
     }
 }
 

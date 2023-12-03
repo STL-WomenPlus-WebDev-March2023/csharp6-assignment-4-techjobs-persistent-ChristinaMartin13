@@ -30,7 +30,7 @@ namespace TechJobs6Persistent.Migrations
 
                     b.HasIndex("SkillsId");
 
-                    b.ToTable("JobSkill");
+                    b.ToTable("JobSkills", (string)null);
                 });
 
             modelBuilder.Entity("TechJobs6Persistent.Models.Employer", b =>
@@ -106,12 +106,17 @@ namespace TechJobs6Persistent.Migrations
             modelBuilder.Entity("TechJobs6Persistent.Models.Job", b =>
                 {
                     b.HasOne("TechJobs6Persistent.Models.Employer", "Employer")
-                        .WithMany()
+                        .WithMany("Jobs")
                         .HasForeignKey("EmployerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employer");
+                });
+
+            modelBuilder.Entity("TechJobs6Persistent.Models.Employer", b =>
+                {
+                    b.Navigation("Jobs");
                 });
 #pragma warning restore 612, 618
         }
